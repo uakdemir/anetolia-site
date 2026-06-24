@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anetolia Information Technologies — IT Consulting</title>
+<meta name="description" content="Anetolia is an independent IT consultancy in Antalya, Türkiye. Architecture-led software engineering, cloud and DevOps, custom development, and applied AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E2A2E;          /* deep Anatolian teal-green (dark base) */
+    --ink-soft:#13383b;
+    --paper:#F4F5F3;        /* cool paper */
+    --paper-2:#ECEEEA;
+    --text:#14201F;         /* near-black, green-tinted */
+    --muted:#5C6B68;
+    --line:#D7DBD6;
+    --teal:#2E6B6B;         /* secondary accent / links / contours */
+    --teal-bright:#3C8C82;
+    --brass:#BD8B3C;        /* single warm accent, used sparingly */
+    --brass-soft:#cfa15b;
+    --on-dark:#EAF0EE;
+    --on-dark-muted:#9DB2AD;
+
+    --display:'Sora',system-ui,sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+
+    --maxw:1180px;
+    --r:14px;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);color:var(--text);background:var(--paper);
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block}
+  ::selection{background:var(--brass);color:#fff}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--teal);font-weight:500;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-family:var(--display);font-weight:600;
+    font-size:15px;padding:13px 22px;border-radius:999px;cursor:pointer;border:1px solid transparent;
+    transition:transform .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease);
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--brass);color:#1a1306}
+  .btn-primary:hover{background:var(--brass-soft)}
+  .btn-ghost{border-color:rgba(234,240,238,.32);color:var(--on-dark)}
+  .btn-ghost:hover{border-color:var(--on-dark);background:rgba(234,240,238,.06)}
+  .btn-dark{background:var(--ink);color:var(--on-dark)}
+  .btn-dark:hover{background:var(--ink-soft)}
+  .btn .arr{transition:transform .25s var(--ease)}
+  .btn:hover .arr{transform:translateX(3px)}
+
+  :focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:4px}
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    transition:background .3s var(--ease),border-color .3s var(--ease),backdrop-filter .3s;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(14,42,46,.82);backdrop-filter:blur(12px) saturate(140%);
+    border-bottom:1px solid rgba(234,240,238,.10);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:11px;color:var(--on-dark)}
+  .brand .mark{flex:0 0 auto}
+  .brand .name{font-family:var(--display);font-weight:700;letter-spacing:.04em;font-size:18px;line-height:1}
+  .brand .sub{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--on-dark-muted);text-transform:uppercase;margin-top:3px}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{font-size:14.5px;color:var(--on-dark-muted);font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--on-dark)}
+  .nav-cta{margin-left:6px}
+  .burger{display:none;background:none;border:none;cursor:pointer;width:42px;height:42px;color:var(--on-dark)}
+  .burger span{display:block;width:22px;height:2px;background:currentColor;margin:5px auto;transition:.3s var(--ease)}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;background:var(--ink);color:var(--on-dark);overflow:hidden;isolation:isolate}
+  #contours{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+  .hero::after{ /* depth + legibility */
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:
+      radial-gradient(120% 90% at 78% 8%, rgba(189,139,60,.10), transparent 55%),
+      radial-gradient(120% 120% at 12% 100%, rgba(60,140,130,.16), transparent 55%),
+      linear-gradient(180deg, rgba(14,42,46,.35), rgba(14,42,46,.78));
+  }
+  .hero-inner{padding:160px 0 96px;max-width:860px}
+  .hero h1{
+    font-family:var(--display);font-weight:700;letter-spacing:-.02em;
+    font-size:clamp(2.5rem,6vw,4.4rem);line-height:1.04;margin:22px 0 0;
+  }
+  .hero h1 .accent{color:var(--brass-soft)}
+  .hero p.lede{
+    font-size:clamp(1.05rem,1.7vw,1.32rem);color:#cdd9d5;max-width:640px;margin-top:24px;font-weight:400;
+  }
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+  .hero-meta{
+    margin-top:64px;padding-top:22px;border-top:1px solid rgba(234,240,238,.14);
+    display:flex;flex-wrap:wrap;gap:14px 40px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;
+    color:var(--on-dark-muted);text-transform:uppercase;
+  }
+  .hero-meta span{display:inline-flex;gap:9px;align-items:center}
+  .hero-meta b{color:var(--teal-bright);font-weight:500}
+
+  /* ---------- Section scaffolding ---------- */
+  .block{padding:104px 0;position:relative}
+  .block-head{max-width:680px;margin-bottom:54px}
+  .block-head h2{
+    font-family:var(--display);font-weight:600;letter-spacing:-.015em;
+    font-size:clamp(1.9rem,3.4vw,2.7rem);line-height:1.12;margin-top:14px;
+  }
+  .block-head p{color:var(--muted);font-size:1.06rem;margin-top:16px;max-width:560px}
+
+  /* ---------- Services ---------- */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 28px 32px;
+    position:relative;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;left:0;top:0;height:3px;width:0;background:var(--brass);
+    transition:width .35s var(--ease);
+  }
+  .card:hover{transform:translateY(-5px);box-shadow:0 22px 44px -28px rgba(14,42,46,.5);border-color:#c9d0ca}
+  .card:hover::before{width:64px}
+  .card .ico{width:34px;height:34px;color:var(--teal);margin-bottom:20px}
+  .card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--brass);text-transform:uppercase}
+  .card h3{font-family:var(--display);font-weight:600;font-size:1.18rem;margin:9px 0 10px;letter-spacing:-.01em}
+  .card p{color:var(--muted);font-size:.97rem}
+
+  /* ---------- Approach (real sequence -> numbered) ---------- */
+  .approach{background:var(--paper-2)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;counter-reset:step}
+  .step{padding:32px 26px;border-top:2px solid var(--ink);background:transparent}
+  .step .num{font-family:var(--mono);font-size:13px;color:var(--teal);letter-spacing:.1em}
+  .step h3{font-family:var(--display);font-weight:600;font-size:1.3rem;margin:14px 0 10px}
+  .step p{color:var(--muted);font-size:.98rem}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:64px;align-items:center}
+  .about-grid p.body{font-size:1.12rem;color:#28332f;line-height:1.7}
+  .about-grid p.body + p.body{margin-top:18px}
+  .stats{display:grid;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+  .stat{background:var(--paper);padding:24px 26px}
+  .stat .v{font-family:var(--display);font-weight:700;font-size:2rem;letter-spacing:-.02em;color:var(--ink)}
+  .stat .l{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+  /* ---------- Contact ---------- */
+  .contact{background:var(--ink);color:var(--on-dark)}
+  .contact .block-head h2{color:var(--on-dark)}
+  .contact .block-head p{color:var(--on-dark-muted)}
+  .contact .eyebrow{color:var(--brass-soft)}
+  .contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+  .ci{margin-bottom:26px}
+  .ci .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark-muted)}
+  .ci .val{font-size:1.12rem;margin-top:6px;color:var(--on-dark)}
+  .ci .val a:hover{color:var(--brass-soft)}
+  form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{display:flex;flex-direction:column;gap:7px}
+  .field.full{grid-column:1/-1}
+  label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--on-dark-muted)}
+  input,textarea{
+    font-family:var(--body);font-size:15px;color:var(--on-dark);background:rgba(234,240,238,.04);
+    border:1px solid rgba(234,240,238,.18);border-radius:10px;padding:13px 15px;width:100%;
+    transition:border-color .2s,background .2s;
+  }
+  input:focus,textarea:focus{outline:none;border-color:var(--brass);background:rgba(234,240,238,.07)}
+  textarea{resize:vertical;min-height:120px}
+  .form-note{grid-column:1/-1;font-size:13px;color:var(--on-dark-muted)}
+
+  /* ---------- Footer ---------- */
+  footer{background:#0a2023;color:var(--on-dark-muted);padding:56px 0 40px;border-top:1px solid rgba(234,240,238,.08)}
+  .foot-top{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-start}
+  .foot-brand .name{font-family:var(--display);font-weight:700;color:var(--on-dark);letter-spacing:.04em;font-size:17px}
+  .foot-brand .sub{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:5px}
+  .foot-links{display:flex;gap:26px;flex-wrap:wrap}
+  .foot-links a{font-size:14px;transition:color .2s}
+  .foot-links a:hover{color:var(--on-dark)}
+  .foot-bottom{
+    margin-top:40px;padding-top:22px;border-top:1px solid rgba(234,240,238,.08);
+    display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  }
+  .coord{color:var(--teal-bright)}
+
+  /* ---------- Reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- Mobile ---------- */
+  @media (max-width:860px){
+    .grid,.steps{grid-template-columns:1fr}
+    .about-grid,.contact-grid{grid-template-columns:1fr;gap:38px}
+    form{grid-template-columns:1fr}
+    .nav-links{
+      position:absolute;top:74px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+      background:rgba(10,32,35,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(234,240,238,.12);
+      padding:8px 28px 22px;transform:translateY(-12px);opacity:0;pointer-events:none;transition:.3s var(--ease);
+    }
+    .nav-links.open{transform:none;opacity:1;pointer-events:auto}
+    .nav-links a{padding:14px 0;border-bottom:1px solid rgba(234,240,238,.07)}
+    .nav-cta{margin:14px 0 0}
+    .burger{display:block}
+    .hero-inner{padding:130px 0 80px}
+    .block{padding:74px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Anetolia Information Technologies home">
+      <svg class="mark" width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+        <path d="M15 25c5.523 0 10-4.477 10-10S20.523 5 15 5" stroke="#BD8B3C" stroke-width="1.6"/>
+        <path d="M15 21c3.314 0 6-2.686 6-6s-2.686-6-6-6" stroke="#3C8C82" stroke-width="1.6"/>
+        <path d="M15 17.5a2.5 2.5 0 1 0 0-5" stroke="#EAF0EE" stroke-width="1.6"/>
+      </svg>
+      <span>
+        <span class="name">ANETOLIA</span>
+        <span class="sub">Information Technologies</span>
+      </span>
+    </a>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-primary nav-cta">Start a conversation <span class="arr">→</span></a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navlinks">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="contours" aria-hidden="true"></canvas>
+    <div class="wrap hero-inner">
+      <p class="eyebrow" style="color:var(--brass-soft)">IT Consulting — Antalya, Türkiye</p>
+      <h1>Complex software, made into systems you can <span class="accent">build on.</span></h1>
+      <p class="lede">Anetolia is an independent IT consultancy. We help teams architect, modernize, and ship software — from cloud and DevOps to custom development and applied AI.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Start a conversation <span class="arr">→</span></a>
+        <a href="#services" class="btn btn-ghost">See what we do</a>
+      </div>
+      <div class="hero-meta">
+        <span><b>/</b> Independent consultancy</span>
+        <span><b>/</b> Anatolia → worldwide</span>
+        <span><b>/</b> Senior engineering team</span>
+        <span><b>/</b> EN · TR</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <p class="eyebrow">What we do</p>
+        <h2>Senior engineering, without the overhead.</h2>
+        <p>A focused set of services for teams that need depth — not a roster of generalists. Pick one, or bring us the whole problem.</p>
+      </div>
+      <div class="grid">
+        <article class="card reveal">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-6 9 6-9 6-9-6z"/><path d="M3 15l9 6 9-6"/><path d="M3 12l9 6 9-6"/></svg>
+          <span class="tag">Architecture</span>
+          <h3>Architecture &amp; Technical Strategy</h3>
+          <p>System design, architecture reviews, and a clear technical direction your team can actually act on.</p>
+        </article>
+        <article class="card reveal">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 18a5 5 0 0 1-1-9.9A6 6 0 0 1 18 8.5 4.5 4.5 0 0 1 17 18H7z"/><path d="M12 13v5"/><path d="M9.5 15.5L12 13l2.5 2.5"/></svg>
+          <span class="tag">Cloud / DevOps</span>
+          <h3>Cloud &amp; DevOps</h3>
+          <p>AWS, containers, and CI/CD pipelines set up to scale without surprises — and to stay observable.</p>
+        </article>
+        <article class="card reveal">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 9l-4 3 4 3"/><path d="M16 9l4 3-4 3"/><path d="M13.5 6l-3 12"/></svg>
+          <span class="tag">Delivery</span>
+          <h3>Custom Software Development</h3>
+          <p>.NET, React, and TypeScript builds — from greenfield products to focused, high-stakes features.</p>
+        </article>
+        <article class="card reveal">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 5V3M12 21v-2M5 12H3M21 12h-2M7 7L5.5 5.5M18.5 18.5L17 17M17 7l1.5-1.5M5.5 18.5L7 17"/></svg>
+          <span class="tag">AI / ML</span>
+          <h3>Applied AI &amp; Machine Learning</h3>
+          <p>Practical LLM and ML integrations: where they help, what they cost, and how to ship them responsibly.</p>
+        </article>
+        <article class="card reveal">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.66 3.13 3 7 3s7-1.34 7-3V6"/><path d="M5 12v6c0 1.66 3.13 3 7 3s7-1.34 7-3v-6"/></svg>
+          <span class="tag">Data</span>
+          <h3>Data Engineering</h3>
+          <p>Pipelines, storage, and analytics that turn scattered data into decisions people trust.</p>
+        </article>
+        <article class="card reveal">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span class="tag">Advisory</span>
+          <h3>Technical Advisory &amp; Due Diligence</h3>
+          <p>A senior second opinion on architecture, hiring, vendors, or a potential acquisition.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="block approach" id="approach">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <p class="eyebrow">How we work</p>
+        <h2>Three steps, no theatre.</h2>
+        <p>Every engagement runs the same simple loop — so you always know where things stand and what comes next.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="num">01 — Assess</div>
+          <h3>Understand first</h3>
+          <p>We start with the system, the constraints, and what “done” actually means for you. No assumptions.</p>
+        </div>
+        <div class="step reveal">
+          <div class="num">02 — Architect</div>
+          <h3>Design the smallest thing that works</h3>
+          <p>We shape the leanest solution that solves the real problem and holds up under real load.</p>
+        </div>
+        <div class="step reveal">
+          <div class="num">03 — Deliver</div>
+          <h3>Build it and hand it over</h3>
+          <p>We build, document, and transfer ownership — so your team runs it confidently after we leave.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="reveal">
+          <p class="eyebrow">Why Anetolia</p>
+          <h2 style="font-family:var(--display);font-weight:600;letter-spacing:-.015em;font-size:clamp(1.9rem,3.4vw,2.7rem);line-height:1.12;margin:14px 0 22px">You work with senior people, start to finish.</h2>
+          <p class="body">Anetolia is a consultancy of senior engineers and architects with deep experience across enterprise platforms, early-stage startups, and applied research.</p>
+          <p class="body">You work directly with the people designing and building your software — not a layer of account managers. That means faster decisions, honest trade-offs, and systems your team can own. We take on work where depth matters more than headcount, and we tell you when a project isn't the right fit.</p>
+        </div>
+        <div class="stats reveal" aria-label="Highlights">
+          <div class="stat"><div class="v">Senior-only</div><div class="l">No juniors on your project</div></div>
+          <div class="stat"><div class="v">End-to-end</div><div class="l">Strategy through delivery</div></div>
+          <div class="stat"><div class="v">EN / TR</div><div class="l">Working languages</div></div>
+          <div class="stat"><div class="v">Antalya</div><div class="l">Based in Türkiye · remote-first</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="block contact" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="eyebrow">Get in touch</p>
+          <h2 style="font-family:var(--display);font-weight:600;letter-spacing:-.015em;font-size:clamp(1.9rem,3.4vw,2.7rem);line-height:1.12;margin:14px 0 28px">Let’s talk about your project.</h2>
+          <div class="ci"><div class="k">Email</div><div class="val"><a href="mailto:info@anetolia.com.tr">info@anetolia.com.tr</a></div></div>
+          <div class="ci"><div class="k">Phone</div><div class="val"><a href="tel:+905332587414">+90 533 258 74 14</a></div></div>
+          <div class="ci"><div class="k">Location</div><div class="val">Antalya, Türkiye</div></div>
+          <div class="ci"><div class="k">Response</div><div class="val">Within a couple of business days</div></div>
+        </div>
+        <form id="contactForm" novalidate>
+          <div class="field"><label for="cf-name">Name</label><input id="cf-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field full"><label for="cf-company">Company <span style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="cf-company" name="company" type="text" autocomplete="organization"></div>
+          <div class="field full"><label for="cf-msg">What are you building?</label><textarea id="cf-msg" name="message" required></textarea></div>
+          <button type="submit" class="btn btn-primary" style="grid-column:1/-1;justify-content:center">Send message <span class="arr">→</span></button>
+          <p class="form-note">This demo opens your email app with the message pre-filled. To collect submissions automatically, connect a form service (see notes from your setup).</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="name">ANETOLIA</div>
+        <div class="sub">Information Technologies</div>
+      </div>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#about">About</a>
+        <a href="mailto:info@anetolia.com.tr">Contact</a>
+        <a href="https://www.linkedin.com/company/anetolia-information-technologies/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> Anetolia Information Technologies · anetolia.com.tr</span>
+      <span class="coord">36.8969° N, 30.7133° E — Antalya</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll state
+  const header = document.getElementById('header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const navlinks = document.getElementById('navlinks');
+  burger.addEventListener('click', () => {
+    const open = navlinks.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navlinks.classList.remove('open'); burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', false);
+  }));
+
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Reveal on scroll
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    }, {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+
+  // Contact form -> mailto (works on any static host)
+  document.getElementById('contactForm').addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const f = ev.target;
+    const name = f.name.value.trim(), email = f.email.value.trim();
+    const company = f.company.value.trim(), msg = f.message.value.trim();
+    if(!name || !email || !msg){ f.reportValidity(); return; }
+    const subject = encodeURIComponent('New enquiry from ' + name + (company ? ' (' + company + ')' : ''));
+    const body = encodeURIComponent('Name: '+name+'\nEmail: '+email+(company?'\nCompany: '+company:'')+'\n\n'+msg);
+    window.location.href = 'mailto:info@anetolia.com.tr?subject='+subject+'&body='+body;
+  });
+
+  // Signature: topographic contour field (Anatolian relief + system layers)
+  (function(){
+    if (reduce) return;
+    const c = document.getElementById('contours');
+    const ctx = c.getContext('2d');
+    let w, h, dpr, t = 0;
+    const LINES = 22;
+    function resize(){
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const r = c.getBoundingClientRect();
+      w = r.width; h = r.height;
+      c.width = w * dpr; c.height = h * dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      for(let i=0;i<LINES;i++){
+        const p = i/(LINES-1);
+        const yBase = h*0.12 + p*h*0.92;
+        const amp = 16 + p*64;
+        const freq = 0.0016 + p*0.0011;
+        const speed = 0.00022 + p*0.00018;
+        const phase = t*speed*1000 + i*0.7;
+        ctx.beginPath();
+        for(let x=-40;x<=w+40;x+=14){
+          const y = yBase
+            + Math.sin(x*freq + phase)*amp
+            + Math.sin(x*freq*2.3 + phase*1.4)*amp*0.28;
+          if(x===-40) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        }
+        const brass = i % 5 === 0;
+        ctx.strokeStyle = brass
+          ? 'rgba(189,139,60,'+(0.10+p*0.14)+')'
+          : 'rgba(60,140,130,'+(0.07+p*0.16)+')';
+        ctx.lineWidth = brass ? 1.1 : 1;
+        ctx.stroke();
+      }
+    }
+    let raf;
+    function loop(now){ t = now||0; draw(); raf = requestAnimationFrame(loop); }
+    resize(); loop(0);
+    window.addEventListener('resize', () => { resize(); }, {passive:true});
+    document.addEventListener('visibilitychange', () => {
+      if(document.hidden){ cancelAnimationFrame(raf); }
+      else { raf = requestAnimationFrame(loop); }
+    });
+  })();
+</script>
+</body>
+</html>
